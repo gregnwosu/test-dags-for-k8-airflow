@@ -105,21 +105,21 @@ with DAG('pretzel_test',
     print_world = PythonOperator(task_id='print_world',
                                  python_callable=print_world)
 
-    k = KubernetesPodOperator(namespace='default',
-                              image="ubuntu:16.04",
-                              cmds=["bash", "-cx"],
-                              arguments=["echo", "10"],
-                              labels={"foo": "bar"},
-                              # secrets=[secret_file, secret_env],
-                              volume=[volume],
-                              volume_mounts=[volume_mount],
-                              name="test",
-                              task_id="kubernetes_task",
-                              affinity=affinity,
-                              is_delete_operator_pod=True,
-                              hostnetwork=False,
-                              tolerations=tolerations
-                              )
+    run_k8 = KubernetesPodOperator(namespace='default',
+                                   image="ubuntu:16.04",
+                                   cmds=["bash", "-cx"],
+                                   arguments=["echo", "10"],
+                                   labels={"foo": "bar"},
+                                   # secrets=[secret_file, secret_env],
+                                   volume=[volume],
+                                   volume_mounts=[volume_mount],
+                                   name="test",
+                                   task_id="kubernetes_task",
+                                   affinity=affinity,
+                                   is_delete_operator_pod=True,
+                                   hostnetwork=False,
+                                   tolerations=tolerations
+                                   )
 
 
-print_hello >> sleep >> print_world
+print_hello >> sleep >> print_world >> sleep >> run_k8
