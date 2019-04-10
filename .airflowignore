@@ -1,1 +1,21 @@
-(?!zip_dag.zip | zip_dag.zip2)
+.airflowignore
+.coverage
+.eggs
+.git
+.gitignore
+.idea
+.mypy_cache
+.pytest_cache
+.xml
+AUTHORS.rst
+CHANGELOG.rst
+LICENSE.txt
+README.md
+README.rst
+dag_contents
+docs
+requirements.txt
+setup.cfg
+setup.py
+src
+tests
