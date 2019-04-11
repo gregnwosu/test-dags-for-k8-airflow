@@ -28,13 +28,10 @@ mkdir airflow
 cp -r /tmp/airflow-temp/airflow/contrib/ ./airflow/contrib
 cp -r /tmp/airflow-temp/airflow/operators ./airflow/operators
 cp ../src/test_dags_for_k8_airflow/helloworlddag.py .
-
 zip -rm zip_dag.zip *
 mv zip_dag.zip ..
-```
 
-In case you would like to add module dependencies to your DAG:
-you basically would do the same, but then it is more to use a virtualenv and pip.
+```
 
 ### Setting up Pycharm
 
@@ -51,7 +48,6 @@ Select you zip folder from you filesystem, it should be zip_dag.zip if you are f
 this guide.
 
 ![adding zip to python path](./docs/_static/images/addziptopythonpath.png)
-
 
 ### .airflowignore
 
