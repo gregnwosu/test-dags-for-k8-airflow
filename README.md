@@ -19,14 +19,10 @@ From the project root folder execute the following commands.
 
 ```bash
 conda activate testdag
-
 mkdir zip_dag_contents
 cd zip_dag_contents
-
 git clone https://github.com/apache/incubator-airflow /tmp/airflow-temp
-mkdir airflow
-cp -r /tmp/airflow-temp/airflow/contrib/ ./airflow/contrib
-cp -r /tmp/airflow-temp/airflow/operators ./airflow/operators
+cp -r /tmp/airflow-temp/airflow .
 cp ../src/test_dags_for_k8_airflow/helloworlddag.py .
 zip -rm zip_dag.zip *
 mv zip_dag.zip ..
