@@ -23,10 +23,11 @@ default_args = {
 }
 
 
-secret_file = Secret('volume', '/etc/sql_conn',
-                     'airflow-secrets', 'sql_alchemy_conn')
-secret_env = Secret('env', 'SQL_CONN', 'airflow-secrets', 'sql_alchemy_conn')
-volume_mount = VolumeMount('test-volume',
+# secret_file = Secret('volume', '/etc/sql_conn',
+# 'airflow-secrets', 'sql_alchemy_conn')
+# secret_env = Secret('env', 'SQL_CONN', 'airflow-secrets', 'sql_alchemy_conn')
+
+volume_mount = VolumeMount('k8-airflow-volume',
                            mount_path='/root/mount_file',
                            sub_path=None,
                            read_only=True)
@@ -34,10 +35,10 @@ volume_mount = VolumeMount('test-volume',
 volume_config = {
     'persistentVolumeClaim':
     {
-        'claimName': 'test-volume'
+        'claimName': 'spike-helm-airflow-postgresql'
     }
 }
-volume = Volume(name='test-volume', configs=volume_config)
+volume = Volume(name='k8-airflow-volume', configs=volume_config)
 
 affinity = {
     'nodeAffinity': {
@@ -95,6 +96,8 @@ tolerations = [
         'value': 'value'
     }
 ]
+ubuntu_image = "ubuntu:16.04"
+alpine_image = "alpine:3.7"
 
 with DAG('pretzel_test',
          default_args=default_args,
@@ -108,8 +111,8 @@ with DAG('pretzel_test',
     print_world = PythonOperator(task_id='print_world',
                                  python_callable=print_world)
 
-    run_k8 = KubernetesPodOperator(namespace='default',
-                                   image="ubuntu:16.04",
+    run_k8 = KubernetesPodOperator(namespace='pretzelpoc',
+                                   image=alpine_image,
                                    cmds=["bash", "-cx"],
                                    arguments=["echo", "10"],
                                    labels={"foo": "bar"},
@@ -122,7 +125,8 @@ with DAG('pretzel_test',
                                    is_delete_operator_pod=True,
                                    hostnetwork=False,
                                    in_cluster=True,
-                                   tolerations=tolerations
+                                   tolerations=tolerations,
+                                   startup_timeout_seconds=300
                                    )
 
 
