@@ -4,9 +4,11 @@
 
 
 ``` bash
-
+conda config --add channels conda-forge
 conda create -n testdag python=3.7.3 anaconda pytest pytest-cov sphinx
+
 conda activate testdag
+conda install airflow-with-kubernetes
 python setup.py develop
 pip install -r requirements.txt
 ```
@@ -28,6 +30,7 @@ cd zip_dag_contents
 git clone https://github.com/apache/incubator-airflow /tmp/airflow-temp
 mkdir airflow
 cp -r /tmp/airflow-temp/airflow/contrib/ ./airflow/contrib
+cp -r /tmp/airflow-temp/airflow/operators ./airflow/operators
 cp ../src/test_dags_for_k8_airflow/helloworlddag.py .
 
 zip -rm zip_dag.zip *

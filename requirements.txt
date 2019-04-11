@@ -15,3 +15,4 @@
 # numpy==1.13.3
 # scipy==1.0
 pyspark-stubs==2.4.0.post1
+apache-airflow==1.10.3
