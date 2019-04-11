@@ -25,6 +25,8 @@ cd zip_dag_contents
 
 git clone https://github.com/apache/incubator-airflow /tmp/airflow-temp
 pip3 install --install-option="--install-lib=$PWD" kubernetes
+rm -rf *-info
+rm *.pth
 mkdir airflow
 cp -r /tmp/airflow-temp/airflow/contrib ./airflow/
 cp -r /tmp/airflow-temp/airflow/operators ./airflow/

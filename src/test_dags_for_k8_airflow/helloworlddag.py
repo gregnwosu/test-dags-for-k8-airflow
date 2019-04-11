@@ -125,4 +125,4 @@ with DAG('pretzel_test',
                                    )
 
 
-print_hello >> sleep >> print_world >> sleep >> run_k8
+print_hello >> sleep >> print_world  >> run_k8
