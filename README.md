@@ -2,26 +2,22 @@
 
 ## creating required environment
 
-
-``` bash
+```bash
 conda config --add channels conda-forge
 conda create -n testdag python=3.7.3 anaconda pytest pytest-cov sphinx
 
 conda activate testdag
-conda install airflow-with-kubernetes
 python setup.py develop
 pip install -r requirements.txt
 ```
 
+## Getting Started
 
+### Setting the conda environment
 
-## packing dags with dependencies
-In case you would like to add module dependencies to your DAG you basically would do the same, but then it is more to use a virtualenv and pip.
+From the project root folder execute the following commands.
 
-
-
-``` bash
-
+```bash
 conda activate testdag
 
 mkdir zip_dag_contents
@@ -37,14 +33,38 @@ zip -rm zip_dag.zip *
 mv zip_dag.zip ..
 ```
 
+In case you would like to add module dependencies to your DAG:
+you basically would do the same, but then it is more to use a virtualenv and pip.
+
+### Setting up Pycharm
+
+Follow the basic instructions[here](https://github.com/shellagilehub/pretzel-brainstorm/blob/master/development-workflow/using-git-with-pycharm.md)
+then [Setup The Extra Depedencies](#Setup The Extra Depedencies).
+
+### Setup The Extra Dependencies
+
+In Pycharm select Preferences -> Project -> ProjectInterpreter
+hit the cog button to the right of Project Interepreter and select "Show All"
+
+Now select the filetree button , hit + to add a new folder.
+Select you zip folder from you filesystem, it should be zip_dag.zip if you are following
+this guide.
+
+![adding zip to python path](./docs/_static/images/addziptopythonpath.png)
 
 
-## .airflowignore
-A .airflowignore file specifies the directories or files in DAG_FOLDER that Airflow should intentionally ignore. Each line in .airflowignore specifies a regular expression pattern, and directories or files whose names (not DAG id) match any of the patterns would be ignored (under the hood, re.findall() is used to match the pattern). Overall it works like a .gitignore file.
+### .airflowignore
 
-.airflowignore file should be put in your DAG_FOLDER. For example, you can prepare a .airflowignore file with contents
+A .airflowignore file specifies the directories or files in DAG_FOLDER that Airflow
+should intentionally ignore. Each line in .airflowignore specifies a regular expression
+pattern, and directories or files whose names (not DAG id) match any of the patterns
+would be ignored (under the hood, re.findall() is used to match the pattern). Overall
+it works like a .gitignore file.
 
-``` apacheconf
+.airflowignore file should be put in your DAG_FOLDER. For example,
+you can prepare a .airflowignore file with contents
+
+```apacheconf
 project_a
 tenant_[\d]
 ```
