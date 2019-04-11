@@ -121,8 +121,9 @@ with DAG('pretzel_test',
                                    affinity=affinity,
                                    is_delete_operator_pod=True,
                                    hostnetwork=False,
+                                   in_cluster=True,
                                    tolerations=tolerations
                                    )
 
 
-print_hello >> sleep >> print_world  >> run_k8
+print_hello >> sleep >> print_world >> run_k8
