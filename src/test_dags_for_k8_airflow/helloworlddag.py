@@ -121,11 +121,11 @@ with DAG('pretzel_test',
                                    volume_mounts=[volume_mount],
                                    name="test",
                                    task_id="kubernetes_task",
-                                   affinity=affinity,
+                                   # affinity=affinity,
                                    is_delete_operator_pod=True,
                                    hostnetwork=False,
                                    in_cluster=True,
-                                   tolerations=tolerations,
+                                   # tolerations=tolerations,
                                    startup_timeout_seconds=300
                                    )
 
