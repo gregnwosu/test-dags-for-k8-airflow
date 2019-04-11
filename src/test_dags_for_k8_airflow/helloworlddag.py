@@ -1,6 +1,9 @@
 import datetime as dt
 
-from airflow import DAG
+from airflow.models import DAG
+
+from airflow.contrib.kubernetes.volume_mount import VolumeMount
+from airflow.contrib.kubernetes.volume import Volume
 
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
