@@ -125,6 +125,7 @@ with DAG('pretzel_test',
                                    is_delete_operator_pod=True,
                                    hostnetwork=False,
                                    in_cluster=True,
+                                   get_logs=True,
                                    # tolerations=tolerations,
                                    startup_timeout_seconds=300
                                    )
