@@ -126,6 +126,7 @@ with DAG('pretzel_test',
                                    hostnetwork=False,
                                    in_cluster=True,
                                    get_logs=True,
+                                   hostnetwork=True,
                                    # tolerations=tolerations,
                                    startup_timeout_seconds=300
                                    )
