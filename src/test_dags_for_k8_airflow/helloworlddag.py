@@ -127,7 +127,7 @@ with DAG('pretzel_test',
                                    get_logs=True,
                                    hostnetwork=True,
                                    # tolerations=tolerations,
-                                   startup_timeout_seconds=300
+                                   startup_timeout_seconds=1000
                                    )
 
 
