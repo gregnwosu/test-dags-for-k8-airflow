@@ -97,7 +97,8 @@ tolerations = [
     }
 ]
 ubuntu_image = "ubuntu:16.04"
-pretzel_image = "pretzelpoc.azurecr.io/circleci-spike"
+pretzel_circleci_image = "pretzelpoc.azurecr.io/circleci-spike"
+pretzel_spark_image = "pretzelpoc.azurecr.io/circleci-spike"
 
 with DAG('pretzel_test',
          default_args=default_args,
@@ -112,7 +113,7 @@ with DAG('pretzel_test',
                                  python_callable=print_world)
 
     run_k8 = KubernetesPodOperator(namespace='pretzelpoc',
-                                   image=ubuntu_image,
+                                   image=pretzel_circleci_image,
                                    # cmds=["bash", "-cx"],
                                    # arguments=["echo", "10"],
                                    labels={"foo": "bar"},
@@ -120,7 +121,7 @@ with DAG('pretzel_test',
                                    # volume=[volume],
                                    # volume_mounts=[volume_mount],
                                    name="test",
-                                   task_id="kubernetes_task",
+                                   task_id="run_circleci_tasks_in_k8",
                                    # affinity=affinity,
                                    is_delete_operator_pod=True,
                                    in_cluster=True,
@@ -129,6 +130,25 @@ with DAG('pretzel_test',
                                    # tolerations=tolerations,
                                    startup_timeout_seconds=1000
                                    )
+#    run_k8_spark_submit = KubernetesPodOperator(namespace='pretzelpoc',
+#                                                image=pretzel_spark_image,
+#                                                # cmds=["bash", "-cx"],
+#                                                # arguments=["echo", "10"],
+#                                                labels={"foo": "bar"},
+#                                                # secrets=[secret_file, secret_env],
+#                                                # volume=[volume],
+#                                                # volume_mounts=[volume_mount],
+#                                                name="test",
+#                                                task_id="run_sparksubmit_task",
+#                                                # affinity=affinity,
+#                                                is_delete_operator_pod=True,
+#                                                in_cluster=True,
+#                                                get_logs=True,
+#                                                hostnetwork=True,
+#                                                # tolerations=tolerations,
+#                                                startup_timeout_seconds=1000
+#                                                )
 
 
 print_hello >> sleep >> print_world >> run_k8
+# << run_k8_spark_submit
