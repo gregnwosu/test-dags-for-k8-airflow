@@ -113,7 +113,7 @@ with DAG('pretzel_test',
                                  python_callable=print_world)
 
     run_k8 = KubernetesPodOperator(namespace='pretzelpoc',
-                                   image=pretzel_circleci_image,
+                                   image=ubuntu_image,
                                    # cmds=["bash", "-cx"],
                                    # arguments=["echo", "10"],
                                    labels={"foo": "bar"},
