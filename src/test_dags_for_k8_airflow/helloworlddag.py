@@ -97,7 +97,7 @@ tolerations = [
     }
 ]
 ubuntu_image = "ubuntu:16.04"
-alpine_image = "alpine:3.7"
+pretzel_image = "pretzelpoc.azurecr.io/circleci-spike"
 
 with DAG('pretzel_test',
          default_args=default_args,
@@ -113,8 +113,8 @@ with DAG('pretzel_test',
 
     run_k8 = KubernetesPodOperator(namespace='pretzelpoc',
                                    image=ubuntu_image,
-                                   cmds=["bash", "-cx"],
-                                   arguments=["echo", "10"],
+                                   # cmds=["bash", "-cx"],
+                                   # arguments=["echo", "10"],
                                    labels={"foo": "bar"},
                                    # secrets=[secret_file, secret_env],
                                    # volume=[volume],
