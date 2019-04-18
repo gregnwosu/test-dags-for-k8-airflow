@@ -97,8 +97,8 @@ tolerations = [
     }
 ]
 ubuntu_image = "ubuntu:16.04"
-pretzel_circleci_image = "pretzelpoc.azurecr.io/circleci-spike"
-pretzel_spark_image = "pretzelpoc.azurecr.io/circleci-spike"
+pretzel_circleci_image = "pretzelpoc.azurecr.io/circleci-spike:latest"
+pretzel_runner_image = "pretzelpoc.azurecr.io/pretzel-runner:latest"
 
 with DAG('pretzel_test',
          default_args=default_args,
@@ -113,7 +113,7 @@ with DAG('pretzel_test',
                                  python_callable=print_world)
 
     run_k8 = KubernetesPodOperator(namespace='pretzelpoc',
-                                   image=ubuntu_image,
+                                   image=pretzel_runner_image,
                                    # cmds=["bash", "-cx"],
                                    # arguments=["echo", "10"],
                                    labels={"foo": "bar"},
